@@ -1,0 +1,27 @@
+#skrypt przenosi co 3 zdjęcie i tworzy folder na pozostałe zdj.
+
+
+@echo off
+setlocal enabledelayedexpansion
+
+set "source=C:\Users\suwarap\Desktop\kozmin p1\06_06_2024\1B"
+set "destination=C:\Users\suwarap\Desktop\kozmin p1\06_06_2024\1B wydzielone"
+
+REM Sprawdź, czy folder docelowy istnieje, jeśli nie, utwórz go
+if not exist "%destination%" (
+    mkdir "%destination%"
+    echo Utworzono folder docelowy: %destination%
+)
+
+set count=0
+
+for %%F in ("%source%\*.*") do (
+    set /a count+=1
+    if !count! lss 4 (
+        echo Przenoszę %%F
+        move "%%F" "%destination%"
+    )
+    if !count! equ 4 set count=0
+)
+
+endlocal
