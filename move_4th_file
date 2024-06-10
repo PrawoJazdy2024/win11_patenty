@@ -1,0 +1,21 @@
+# ponizszy kod pozwala na przeniesienie do innego kartonu co 4 pliku
+
+
+
+@echo off
+setlocal enabledelayedexpansion
+
+set "source=C:\ścieżka\do\źródłowego\folderu"
+set "destination=C:\ścieżka\do\docelowego\folderu"
+set count=0
+
+for %%F in ("%source%\*.*") do (
+    set /a count+=1
+    if !count! lss 4 (
+        echo Przenoszę %%F
+        move "%%F" "%destination%"
+    )
+    if !count! equ 4 set count=0
+)
+
+endlocal
